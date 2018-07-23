@@ -4,7 +4,11 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if params[:search]
+      @users = User.where('name LIKE ? OR stuff_id LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
+    else
+      @users = User.all
+    end
   end
 
   # GET /users/1
@@ -69,6 +73,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :stuff_id)
+      params.require(:user).permit(:name, :stuff_id, :avatar)
     end
 end

@@ -10,5 +10,13 @@
   <%= @user.stuff_id %>
 </p>
 
+<p>
+	<% unless @user.avatar.attachment.nil? %>
+		<%= image_tag @user.avatar, class: "img-fluid", size: "200x200" %>
+	<% else %>
+		<img src="https://www.bsn.eu/wp-content/uploads/2016/12/user-icon-image-placeholder-300-grey.jpg" class="img-fluid">
+	<% end %>
+</p>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
